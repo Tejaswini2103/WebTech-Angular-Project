@@ -1,0 +1,107 @@
+.ticker {
+  font-size: 35px;
+  font-weight: 400;
+}
+
+
+mat-option {
+  margin-left: 47%;
+}
+
+.description {
+  color: grey;
+  font-weight: normal;
+}
+
+.exchange {
+  color: grey;
+}
+
+img {
+  margin-left: 35%;
+}
+
+.buyButton {
+  background-color:#56ad05;
+  color: white;
+  margin-right: 5px;
+}
+
+.sellButton {
+  background-color:#e30802;
+  color: white;
+}
+
+
+.priceofstock {
+  font-size: 35px;
+  font-weight: 400;
+}
+
+
+
+.datetime {
+  color: grey;
+}
+
+
+.col1 {
+  text-align: center;
+}
+
+#summary {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+}
+
+#summary-details {
+  font-size: 15px;
+  padding-top: 30px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+
+  border:0px;
+
+}
+
+.names {
+  font-weight: bold;
+}
+
+#aboutCompany{
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.aboutCompanyTable {
+  text-align: left;
+}
+
+.aboutCmp {
+  font-weight: bold;
+}
+
+button {
+  word-wrap: break-word;
+}
+
+.fa-star {
+  color: #ebc000;
+}
+
+
+.footer {
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

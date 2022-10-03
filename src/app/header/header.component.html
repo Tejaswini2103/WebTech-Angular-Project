@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #1418a3;">
+  <a class="navbar-brand" href="#">Stock Search</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a  class="nav-link" href="{{path}}" (click)="openDetails()">Search</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="'/watchlist'" class="nav-link ">Watchlist</a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="'/portfolio'" class="nav-link" href="#">Portfolio</a>
+      </li>
+    </ul>
+  </div>
+</nav>

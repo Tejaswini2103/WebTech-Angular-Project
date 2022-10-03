@@ -1,0 +1,18 @@
+h1 {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 35px;
+}
+
+input {
+  margin-left: 15px;
+}
+
+#button-addon1 {
+  color: #1418a3;
+}
+
+#button-addon2 {
+  color: #1418a3;
+}
+

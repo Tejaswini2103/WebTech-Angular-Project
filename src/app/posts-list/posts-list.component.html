@@ -1,0 +1,13 @@
+<mat-accordion multi="true" *ngIf="posts!=undefined">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      {{ posts.title }}
+    </mat-expansion-panel-header>
+    <p>{{ posts.content }}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="posts== undefined">No posts added yet!</p>

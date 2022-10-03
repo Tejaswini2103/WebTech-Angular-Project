@@ -1,0 +1,58 @@
+<div class="container p-3 my-3 ">
+<br>
+<br>
+<h1>
+  My Watchlist
+</h1>
+<br>
+<ng-container *ngIf="watchlisted.length>0" >
+  <ng-container *ngIf="watchlistinfo!=undefined" >
+  <div class="row card" *ngFor="let item of watchlistinfo">
+   <div class="close-button">
+        <button style="float:right;position:relative ;top: -5px;right: -5px;color: black;" type="cancel" class="btn btn-link" (click)="clicked(item.ticker)"><i class="fa fa-close"></i></button>
+      </div>
+      <div class="card-body" (click)="navigate(item.ticker)" >
+   <div class="card-title">
+        <div>
+      {{ item.ticker }}
+   </div>
+     <div [ngClass]="{'text-success' : item.d>0, 'text-danger': item.d<0}">
+         {{ item.c}}
+    </div>
+       </div>
+   <div class="card-subtitle">
+      <div>
+          {{ item.name}}
+       </div>
+      <div [ngClass]="{'text-success' : item.d>0, 'text-danger': item.d<0}">
+          <i *ngIf="item.d> 0" class="fa fa-caret-up"></i>
+ <i *ngIf="item.d< 0" class="fa fa-caret-down"></i>
+            {{item.modd}} ({{item.moddp}}%)
+     </div>
+    </div>
+      </div>
+      </div>
+  <br>
+
+</ng-container>
+<ng-container *ngIf="watchlistinfo==undefined" >
+  <mat-spinner diameter="40"></mat-spinner>
+
+</ng-container>
+</ng-container>
+<ng-container *ngIf="watchlisted.length<=0">
+  <div class=container4 *ngIf= "watchlisted.length===0" >
+    <p id="nodata">Currently you don't have any stock in your watchlist.</p>
+  </div>
+
+</ng-container>
+</div>
+
+<div class="footer">
+  <p><b><i>Powered by </i></b>
+   <a href="https://finnhub.io"><b><i>Finnhub.io</i></b></a></p>
+</div>
+
+
+
+

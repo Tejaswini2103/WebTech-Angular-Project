@@ -1,0 +1,16 @@
+.footer {
+  left: 0;
+  bottom: 100;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+  position: relative;
+ height: 1rem;
+}
+
+
+#demo {
+  position: relative;
+  min-height: 100vh;
+}

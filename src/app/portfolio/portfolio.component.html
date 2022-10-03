@@ -1,0 +1,101 @@
+<br>
+<br>
+<h1>
+  My Portfolio
+</h1>
+<h2>
+  Money in Wallet: ${{moneyInWallet}}
+</h2>
+<br>
+
+<div class="container p-3 my-3">
+  <ngb-alert #selfClosingAlert *ngIf="buysuccessMessage" type="success" (closed)="buysuccessMessage = ''">{{ buysuccessMessage }}</ngb-alert>
+  <ng-container *ngIf="stocksBought.length>0" >
+    <ng-container *ngIf="portfolioInfo!=undefined" >
+<div class="row card" *ngFor="let item of portfolioInfo">
+<div class="card-header" (click)="navigateToDetails(item.ticker)">
+<div>{{ item.ticker  }}</div>
+<div>{{item.name}}</div>
+ </div>
+
+ <div class="container">
+      <div class="row">
+           <div class="col-md">
+        <div class="row justify-content-between">
+    <div class="quantity" (click)="testSell(item.ticker)">
+  Quantity:
+  </div>
+     <div>
+      {{ item.Quantity}}
+    </div>
+  </div>
+   <div class="row justify-content-between">
+        <div class="avgcost" (click)="testBuy()">
+    Avg. Cost / Share:
+           </div>
+    <div>
+           {{ item.AvgCost | number:'.2-2' }}
+         </div>
+       </div>
+    <div class="row justify-content-between">
+               <div>
+    Total Cost:
+            </div>
+        <div>
+             {{ item.TotalCost | number:'.2-2' }}
+      </div>
+         </div>
+      </div>
+       <div class="col-md">
+       <div class="row justify-content-between">
+           <div>
+           Change:
+        </div>
+            <div [ngClass]="{'text-success' : item.Change>0, 'text-danger': item.Change<0}">
+              <i *ngIf="item.Change> 0" class="fa fa-caret-up"></i>
+              <i *ngIf="item.Change< 0" class="fa fa-caret-down"></i>
+              {{ item.Change | number:'.2-2' }}
+            </div>
+        </div>
+             <div class="row justify-content-between">
+        <div>
+        Current Price:
+</div>
+    <div [ngClass]="{'text-success' : item.Change>0, 'text-danger': item.Change<0}">
+      {{ item.CurrentPrice | number:'.2-2' }}
+ </div>
+       </div>
+      <div class="row justify-content-between">
+                <div>
+         Market Value:
+   </div>
+  <div [ngClass]="{'text-success' : item.Change>0, 'text-danger': item.Change<0}">
+    {{ item.MarketVal | number:'.2-2' }}
+             </div>
+           </div>
+        </div>
+     </div>
+</div>
+
+  <div class="card-footer">
+<button type="button" class="btn btn-primary btn-lg" (click)="openForBuy(item.ticker, item.CurrentPrice)">Buy</button>
+ <button type="button" class="btn btn-danger btn-lg" (click)="openForSell(item.ticker, item.CurrentPrice)">Sell</button>
+</div>
+</div>
+</ng-container>
+<ng-container *ngIf="portfolioInfo==undefined" >
+  <mat-spinner diameter="40"></mat-spinner>
+
+</ng-container>
+</ng-container>
+<ng-container *ngIf="stocksBought.length<=0">
+  <div class=container4 >
+    <p id="alertmsg">Currently you don't have any stock.</p>
+  </div>
+  </ng-container>
+</div>
+
+<div class="footer">
+  <p><b><i>Powered by </i></b>
+   <a href="https://finnhub.io"><b><i>Finnhub.io</i></b></a></p>
+</div>

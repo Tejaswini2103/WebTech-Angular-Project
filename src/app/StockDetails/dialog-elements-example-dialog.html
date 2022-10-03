@@ -1,0 +1,20 @@
+<div mat-dialog-actions style="float: right;top: -24px;right: -24px;">
+  <button mat-button mat-dialog-close>X</button>
+</div>
+<h1 mat-dialog-title style="font-size: 30px;">{{data.source }}</h1>
+<p>{{data.datetime }}</p>
+<hr>
+<div mat-dialog-content>
+  <p><b>{{data.headline }}</b><p>
+  <p>{{ data.summary }}</p>
+  <p>For more details click <a href="{{data.url}}" target="_blank">here</a></p>
+<br>
+<p>Share</p>
+<br>
+
+<a class="twitter-share-button" href="{{data.twitterurl}}" target="_blank">
+
+<img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png" width="40px" height="40px"> </a>
+<a href="{{data.facebookurl}}" target="_blank">
+<img src="https://www.freepnglogos.com/uploads/logo-facebook-png/logo-facebook-facebook-logo-transparent-png-pictures-icons-and-0.png" width="40px" height="40px"> </a>
+</div>

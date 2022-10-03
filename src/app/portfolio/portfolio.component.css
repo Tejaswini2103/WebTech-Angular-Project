@@ -1,0 +1,87 @@
+.card-footer > button:last-child {
+  margin-left: 15px;
+}
+
+.card-header > div:nth-child(2) {
+  color: #687380;
+  font-size: 20px;
+  margin-left: 10px;
+
+}
+
+h1 {
+  font-size: 30px;
+  margin-left: 10%;
+  font-weight:450;
+}
+
+.card-header {
+  align-items: baseline;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+
+}
+
+h2 {
+  font-size: 22px;
+  margin-left: 10%;
+  font-weight:400;
+}
+
+div.container4 {
+
+  height: 40px;
+  position: relative;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: #fae9b9;
+}
+
+#alertmsg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.col-md .row {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+
+.card-header > div:first-child {
+  font-size: 30px;
+}
+
+.card-header:hover {
+  cursor: pointer;
+}
+
+.card .container {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

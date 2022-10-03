@@ -1,0 +1,51 @@
+<br>
+<br>
+<h1> STOCK SEARCH</h1>
+<br>
+
+<div class="container" style="width: 400px">
+  <div class="p-1 rounded rounded-pill mb-4" style="border:2px solid blue">
+  <div class="input-group">
+    <input type="text"
+           #searchBar
+           placeholder="Enter stock ticker symbol"
+           aria-label="Number"
+           matInput
+           class="form-control border-0 mb-0 shadow-none"
+           (input)="changeInput(searchBar.value)"
+           (keyup.enter)="navigateToDetails()"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='selectedOption($event.option.value)'>
+      <mat-option *ngIf="result.length<=0 && userInput!=undefined" class="is-loading readonly">
+        <mat-spinner diameter="40"></mat-spinner>
+      </mat-option>
+      <ng-container *ngIf="result.length>0">
+      <ng-container *ngFor="let res of result" >
+        <mat-option *ngIf="res.type==='Common Stock'  && !res.symbol.includes('.')" [value]="res.symbol">
+        {{ res.symbol }} | {{ res.description }}
+      </mat-option>
+      </ng-container>
+    </ng-container>
+    </mat-autocomplete>
+    <div class="input-group-append">
+      <button id="button-addon1" type="submit" class="btn btn-link text-primary" (click)="navigateToDetails()"><i class="fa fa-search"></i></button>
+      <button id="button-addon2" type="cancel" class="btn btn-link text-primary" (click)="handleClear()"><i class="fa fa-close"></i></button>
+      </div>
+       </div>
+          </div>
+          </div>
+
+          <div class="container p-3 my-3 ">
+          <div *ngIf="tempfield==='unset'" class="mymainclass">
+            <div class="alert alert-danger" role="alert" style="text-align: center;">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Please enter a valid ticker
+            </div>
+          </div>
+          </div>
+
+          <router-outlet></router-outlet>
+
+
+
+

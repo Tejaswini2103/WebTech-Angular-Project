@@ -1,0 +1,60 @@
+.card-body {
+  padding-bottom: 30px;
+  padding-top: 0px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight:450;
+}
+
+div.container4 {
+
+  height: 40px;
+  position: relative;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: #fae9b9;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card-title {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  line-height: 30px;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+#nodata {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-subtitle {
+  line-height: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

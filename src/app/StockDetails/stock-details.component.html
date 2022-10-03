@@ -1,0 +1,255 @@
+<mat-option *ngIf="(info | json) == '{}' || (info == undefined)" class="is-loading readonly">
+  <mat-spinner diameter="40"></mat-spinner>
+</mat-option>
+
+<div *ngIf="(info | json) != '{}'" class="mymainclass">
+
+<ng-container *ngIf="info!=undefined">
+  <ng-container *ngIf="priceinfo!=undefined">
+<div class="container p-3 my-3 ">
+  <ngb-alert #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}</ngb-alert>
+  <ngb-alert #selfClosingAlert *ngIf="removedMessage" type="danger" (closed)="removedMessage = ''">{{ removedMessage }}</ngb-alert>
+  <ngb-alert #selfClosingAlert *ngIf="buysuccessMessage" type="success" (closed)="buysuccessMessage = ''">{{ buysuccessMessage }}</ngb-alert>
+
+  <div class="row">
+    <div class="col">
+
+ <h2 class="ticker"> {{info.ticker}} <i *ngIf="isWatchlisted()" class="fa fa-star" (click)="removeFromWatchlist()"></i>
+  <i *ngIf="!isWatchlisted()" class="fa fa-star-o" (click)="addToWatchlist()"></i>  </h2>
+
+ <h4 class="description" (click)="testSell()"  > {{info.name}} </h4>
+ <p class="exchange">{{ info.exchange }}</p>
+ <button mat-button class="buyButton" (click)="open()">Buy</button>
+ <button *ngIf="areSharesBought()" mat-button class="sellButton" (click)="openForSell()">Sell</button>
+ </div>
+ <div class="col">
+   <br>
+ <img src="{{ info.logo }}" class="img-responsive" width="100px" height="100px" (click)="testBuy()" >
+</div>
+<div class="col">
+
+  <div class="float-right">
+    <div [ngClass]="{'text-success' : changeinprice >0, 'text-danger': changeinprice <0}">
+
+      <h2 class="priceofstock float-right"> {{priceofstock }} </h2></div>
+    <div [ngClass]="{'text-success' : changeinprice >0, 'text-danger': changeinprice <0}">
+      <i *ngIf="changeinprice> 0" class="fa fa-caret-up" ></i>
+      <i *ngIf="changeinprice< 0" class="fa fa-caret-down"></i>
+      <h4 class="pricechange float-right"> ({{modpercentchange }}%)</h4>
+       <h4 class="pricechange float-right"> {{modchangeinprice }}</h4>
+      </div>
+      <div>
+        <p class="datetime float-right">{{datetime}}</p></div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="container p-3 my-3 ">
+
+</div>
+<div class="container p-3 my-3 ">
+
+    <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+    <mat-tab label="Summary" >
+
+      <div class="container" id="summary">
+        <div class="row">
+          <div class="col-lg" id="summary-details">
+            <div class="row justify-content-around" id="summary-prices">
+              <div class="col-6 col-sm-auto">
+                  <table class = "summarytable">
+                    <tr>
+                      <td class="names">High Price:</td>
+                      <td>{{ priceinfo.h | number:'.2-2' }}</td>
+                    </tr>
+                    <tr>
+                      <td class="names">Low Price:</td>
+                      <td>{{ priceinfo.l | number:'.2-2' }}</td>
+                    </tr>
+                    <tr>
+                      <td class="names">Open Price:</td>
+                      <td>{{ priceinfo.o | number:'.2-2' }}</td>
+                    </tr>
+                    <tr>
+                      <td class="names">Prev Close:</td>
+                      <td>{{ priceinfo.c | number:'.2-2' }}</td>
+                    </tr>
+                  </table>
+                </div>
+                      <div class="col-6 col-sm-auto"></div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-12" id="aboutCompany"><p><u>About the company</u></p></div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-12">
+
+                    <table class = "aboutCompanyTable">
+                      <tr>
+                        <td class="aboutCmp">IPO Start Date:</td>
+                        <td> {{ ipostartDate }}</td>
+                      </tr>
+                      <tr>
+                        <td class="aboutCmp">Industry:</td>
+                        <td> {{ info.finnhubIndustry }}</td>
+                      </tr>
+                      <tr>
+                        <td class="aboutCmp">Webpage:</td>
+                        <td><a href="{{info.weburl}}" target="_blank">{{info.weburl}}</a></td>
+                      </tr>
+                      <tr>
+                        <td class="aboutCmp">Company peers:</td>
+                        <td  class="peers" *ngIf="rows.length>5">
+                          {{rows.slice(0,5)}} <br>
+                          {{rows.slice(5)}}
+                          </td>
+                          <td  class="peers" *ngIf="rows.length<=5">
+                           {{rows}}
+                            </td>
+                      </tr>
+
+
+
+                    </table>
+                  </div>
+                </div>
+          </div>
+          <div class="col-lg">
+            <div class="container">
+              <div class="row">
+
+          <highcharts-chart [Highcharts]="Highcharts"  [constructorType]="chartConstructor" [options]="hourlychartOptions" style="width: max-content"> </highcharts-chart>
+              </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Top News">
+
+    <!-- <table class="table table-striped">
+
+        <tr *ngFor="let x of companynewsArr; index as i; ">
+          <td>{{x.url}}</td>
+          <td>{{x.headline}}</td>
+        </tr>
+      </table> -->
+
+      <mat-option *ngIf="companynewsArrFirstHalf== undefined" class="is-loading readonly">
+        <mat-spinner diameter="40"></mat-spinner>
+      </mat-option>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-6 col-md-6">
+            <div class="table-responsive">
+            <table id="CompanyNewsLeft" class="table w-auto" style="border-collapse:separate;border-spacing:0 15px; table-layout:fixed; width: 100%;" >
+
+              <tr  *ngFor="let x of companynewsArrFirstHalf; index as i;" style="background-color: white;">
+                <div (click)="clicked(x)" style="cursor: pointer;">
+                <td style="border:1px solid #b9b9b8; text-align:left; border-right:hidden; overflow: hidden; width: 20%;"><img width=150 height=70 src= "{{ x.image}}"/> </td>
+                <td style="vertical-align:middle; font-size: 13px; padding: 15px; border:1px solid #b9b9b8; border-left:hidden;
+                color: #474747; overflow: hidden;  min-width: 80%;"> <p> {{ x.headline }}</p>
+
+                </td>
+              </div>
+                </tr>
+              </table>
+
+            </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="table-responsive">
+                <table id="CompanyNewsRight" class="table" style="border-collapse:separate;border-spacing:0 15px; table-layout:fixed; width: 100%;">
+                  <tr  *ngFor="let x of companynewsArrSecondHalf; index as i;" style="background-color: white;">
+                    <div (click)="clicked(x)" style="cursor: pointer;">
+                    <td style="border:1px solid #b9b9b8; text-align:left; border-right:hidden; overflow: hidden; width: 20%;"><img width=150 height=70 src= "{{ x.image}}"/> </td>
+                   <td style="vertical-align:middle; font-size: 13px; padding: 15px; border:1px solid #b9b9b8; border-left:hidden; color: #474747; overflow: hidden;min-width: 80%;">{{ x.headline }}
+                    </td>
+                  </div>
+                    </tr>
+                  </table>
+                </div>
+
+            </div>
+
+        </div>
+      </div>
+
+
+    </mat-tab>
+
+
+    <mat-tab label="Charts">
+      <div class="container" id="charts">
+        <div class="row">
+      <highcharts-chart style="width: 1100px;height: 500px;" [Highcharts]="Highcharts"  [constructorType]="chartConstructor" [options]="chartOptions" > </highcharts-chart>
+    </div>
+    </div>
+    </mat-tab>
+
+
+    <mat-tab label="Insights">
+      <br>
+      <h4 style="text-align: center; color: #3e403e;">Social Sentiments</h4>
+    <div class = "row justify-content-around">
+
+      <table class = "mentionsTable table-bordered table" style="max-width: 50%">
+        <tr class="active" style="background-color: #ebebf0;">
+        <th class="heading"> {{ ticker}} </th>
+        <th class="heading"> Reddit </th>
+        <th class="heading"> Twitter</th>
+      </tr>
+        <tr>
+          <td class="names" style="background-color: #ebebf0;">Total Mentions</td>
+          <td>{{ redditMentions }}</td>
+          <td>{{ twitterMentions }}</td>
+        </tr>
+        <tr>
+          <td class="names" style="background-color: #ebebf0;">Positive Mentions</td>
+          <td>{{ redditPositiveMentions }}</td>
+          <td>{{ twitterPositiveMentions }}</td>
+        </tr>
+        <tr>
+          <td class="names" style="background-color: #ebebf0;">Negative Mentions</td>
+          <td>{{ redditNegativeMentions }}</td>
+          <td>{{ twitterNegativeMentions }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class ="row">
+      <div class="chart" style="width: 50%; height: 40%;">
+      <highcharts-chart [Highcharts]="Highcharts"  [constructorType]="chartConstructorTrends" [options]="chartOptionsTrends" > </highcharts-chart>
+    </div>
+    </div>
+  </mat-tab>
+  </mat-tab-group>
+
+</div>
+
+</ng-container>
+</ng-container>
+
+</div>
+
+<!--
+<div class="container p-3 my-3 ">
+  <div *ngIf="(info | json) === '{}'" class="mymainclass">
+    <div class="alert alert-danger" role="alert" style="text-align: center;">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      No data found. Please enter a valid ticker
+    </div>
+  </div>
+  </div>
+-->
+<div class="footer">
+  <p><b><i>Powered by </i></b>
+   <a href="https://finnhub.io"><b><i>Finnhub.io</i></b></a></p>
+</div>
+
+
